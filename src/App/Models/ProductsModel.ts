@@ -15,12 +15,12 @@ export class ProductsModel {
         ProductsModel.instance = this;
     }
 
-    // Изменим метод на статический
+    
     static getProducts(): Promise<Product[]> {
         return getProducts() // Убрана точка перед .then
             .then((products: Product[]) => {
                 appStore.update({
-                    products, // Исправлено: передаем объект в appStore.update()
+                    products, 
                 });
                 return products;
             });
