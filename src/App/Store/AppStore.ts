@@ -1,13 +1,13 @@
 import { BehaviorSubject } from "rxjs";
 import { Product } from "../interfaces/Product";
 
-// Добавим тип State для использования в коде
+
 export interface State {
     products: Product[];
-    cart: ShoppingCart; // Используем переименованный интерфейс
+    cart: ShoppingCart; 
 }
 
-// Исправляем интерфейс локальной корзины
+
 export interface ShoppingCart {
     products: {
         [key: string]: {
@@ -17,12 +17,12 @@ export interface ShoppingCart {
     };
 }
 
-// Определение начального состояния
+
 const DEFAULT_STATE: State = {
     cart: {
         products: {},
     },
-    products: [], // Добавлено присваивание для products
+    products: [], 
 };
 
 export class AppStore {
@@ -49,24 +49,24 @@ export class AppStore {
         console.log("Добавляем продукт в корзину:", product);
         const currentCart = this.state.cart.products;
 
-        // Обновляем корзину, не теряя существующие продукты
+       
         const newCart = {
             ...currentCart,
             [product.id]: {
                 product,
-                amount: (currentCart[product.id]?.amount || 0) + 1, // Увеличиваем количество
+                amount: (currentCart[product.id]?.amount || 0) + 1, 
             }
         };
 
         console.log("Обновленная корзина:", newCart);
 
-        // Обновляем состояние с новой корзиной
+       
         this.update({
             cart: { products: newCart },
         });
     }
 
-    // Обновление состояния
+   
     update(state: Partial<State> = {}) {
         this.$state.next({
             ...this.state,
