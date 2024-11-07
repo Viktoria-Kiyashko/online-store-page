@@ -1,5 +1,5 @@
-import { Product } from "../../interfaces/Product"; // Убедитесь, что путь правильный
-import { ProductItem } from "../ProductItem"; // Убедитесь, что путь правильный
+import { Product } from "../../interfaces/Product"; 
+import { ProductItem } from "../ProductItem"; 
 import { ProductsModel } from "../../Models/ProductsModel";
 import { appStore } from "../../Store/AppStore"; 
 import { AppComponent } from "../../interfaces/Component";
@@ -17,7 +17,7 @@ export class ProductsList implements AppComponent {
         appStore.$state.subscribe(({ products }) => {
             this.products = products;
             this.productsComponents = this.products.map(product => new ProductItem(product));
-            this.updateDOM(); // Обновляем DOM после обновления продуктов
+            this.updateDOM(); 
             this.loading = false;
             this.error = null;
         });
@@ -29,7 +29,7 @@ export class ProductsList implements AppComponent {
         return ProductsModel.getProducts()
             .then((products: Product[] | void) => {
                 if (products) {
-                    // Если продукты успешно получены, обновляем состояние
+                    
                     appStore.update({
                         products: products,
                     });
@@ -39,7 +39,7 @@ export class ProductsList implements AppComponent {
                 this.error = error; // Обработка ошибки
             })
             .finally(() => {
-                this.loading = false; // Сбрасываем индикатор загрузки
+                this.loading = false; 
             });
     }
 
@@ -62,11 +62,11 @@ export class ProductsList implements AppComponent {
     }
 
     updateDOM() {
-        const container = document.getElementById('products-container'); // Предполагаем, что у вас есть контейнер для продуктов
+        const container = document.getElementById('products-container');
 
         if (container) {
-            container.innerHTML = this.render(); // Обновляем содержимое контейнера с помощью метода render
-            this.addEvents(); // Добавляем события после рендеринга
+            container.innerHTML = this.render(); 
+            this.addEvents(); 
         } else {
             console.error('Container with ID products-container not found.');
         }
@@ -74,7 +74,7 @@ export class ProductsList implements AppComponent {
 
     addEvents() {
         this.productsComponents.forEach(component => component.addEvents());
-        this.addNavigationEvents(); // Добавляем события для кнопок навигации
+        this.addNavigationEvents();
     }
 
     private addNavigationEvents() {
