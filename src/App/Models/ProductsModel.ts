@@ -17,7 +17,7 @@ export class ProductsModel {
 
     
     static getProducts(): Promise<Product[]> {
-        return getProducts() // Убрана точка перед .then
+        return getProducts() 
             .then((products: Product[]) => {
                 appStore.update({
                     products, 
