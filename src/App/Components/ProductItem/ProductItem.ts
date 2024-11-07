@@ -3,7 +3,7 @@
 
 import { AppComponent } from "../../interfaces/Component";
 import { Product } from "../../interfaces/Product";
-import { appStore } from "../../Store/AppStore"; // Импортируем appStore
+import { appStore } from "../../Store/AppStore";
 
 export class ProductItem implements AppComponent {
   constructor(private product: Product) {}
@@ -28,19 +28,19 @@ export class ProductItem implements AppComponent {
     if (!button) {
         console.warn(`Button with ID ${this.getHtmlID()} is not found. Retrying...`);
         setTimeout(() => this.addEvents(), 100);
-        return; // Выходим из метода
+        return; 
     }
 
-    // Убираем предыдущий обработчик, если он существует
+    
     button.removeEventListener('click', this.onClick.bind(this)); 
     
-    // Добавляем новый обработчик
+   
     button.addEventListener('click', this.onClick.bind(this));
 }
 
 private onClick(event: Event) {
-    event.preventDefault(); // Отменяем стандартное поведение ссылки
-    appStore.addProduct(this.product); // Используем appStore для добавления продукта в корзину
+    event.preventDefault(); 
+    appStore.addProduct(this.product); 
 }
 }
 
